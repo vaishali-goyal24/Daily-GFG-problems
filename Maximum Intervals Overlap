@@ -1,0 +1,36 @@
+	vector<int> findMaxGuests(int Entry[], int Exit[], int N)
+	{
+	   // Your code goes here
+	  
+        sort(Entry, Entry + N);
+        sort(Exit,  Exit  + N);
+        
+        int guestIn = 1, guests = 1;
+        int timer   = Entry[0];
+        
+        int i = 1, j = 0;
+        
+        while(i < N and j < N)
+        {
+            if(Entry[i] <= Exit[j])
+            {
+                guestIn++;
+                
+                if(guestIn > guests)
+                {
+                    guests = guestIn;
+                    timer  = Entry[i];
+                }
+                
+                i++;
+            }
+            else
+            {
+                guestIn--;
+                
+                j++;
+            }
+        }
+        
+        return {guests, timer};
+	}
