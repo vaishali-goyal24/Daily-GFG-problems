@@ -1,0 +1,17 @@
+vector<vector<string> > Anagrams(vector<string>& s) 
+{
+    // Your Code Here
+    map<string,vector<string>>m;
+    for(int i=0;i<s.size();i++)
+    {
+        string d=s[i];
+        sort(d.begin(),d.end());
+        m[d].push_back(s[i]);
+    }
+    vector<vector<string>>v;
+    for(auto i=m.begin();i!=m.end();i++)
+    {
+       v.push_back(i->second);
+    }
+    return v;
+}
