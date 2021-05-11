@@ -1,0 +1,31 @@
+
+class Solution {
+    public:
+   
+int f(Node* root, int target, int &ma, int top)
+{
+if(!root)
+return 0;
+if(!root->left && !root->right && root->data == target)
+return -1;
+int left = f(root->left, target, ma, top+1);
+int right = f(root->right, target, ma, top+1);
+if(left < 0) //Negative depth means, contains target
+{
+ma = max(ma, -left+max(right, top));
+return left-1;
+}
+if(right < 0)
+{
+ma = max(ma, -right+max(left, top));
+return right-1;
+}
+return 1 + max(left, right);
+}
+int minTime(Node* root, int target)
+{
+int ma = 0;
+f(root, target, ma, 0);
+return ma;
+}
+};
