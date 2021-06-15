@@ -1,0 +1,29 @@
+
+if(str.length()==1)
+return "str";
+map<char,int>m;
+for(int i=0;i<str.length();i++) 
+m[str[i]]++;
+string s;
+priority_queue<pair<int,char>>p;
+for(auto i:m)
+p.push(make_pair(i.second,i.first));
+if(p.size()==1)
+return "-1";
+while(p.size()>1){
+pair<int,char>p1=p.top();
+s+=p1.second;
+p.pop();
+pair<int,char>p2=p.top();
+s+=p2.second;
+p.pop();
+if(--p1.first!=0)
+p.push(p1);
+if(--p2.first!=0)
+p.push(p2);
+}
+if(p.size()==1 && p.top().first==1)
+{s+=p.top().second;p.pop();}
+if(p.size()==0)
+return s;
+else return "-1";
